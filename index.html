@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="fr-fr">
+    <head>
+        <meta charset="utf-8">
+        <title>Réseau en anneaux</title>
+        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+        
+        <link rel="stylesheet" href="style.css">
+        <script src="reseau.js"></script>
+        <script src="machine.js"></script>
+        <script src="paquet.js"></script>
+        <script src="main.js"></script>
+        <script>
+        function getRandomInt(min, max) {
+            return Math.floor(Math.random() * (max - min)) + min;
+        }
+        </script>
+    </head>
+    
+    <body>
+        <div id="mainContent">
+            <h1>Réseau</h1>
+            <div id="machinesContainer">
+                <i class="fa fa-user-plus" id="userPlus" title="Ajouter une machine"
+                onclick="if(RESEAU.machines.length < 9) {
+                    RESEAU.addMachine();
+                }
+                if (RESEAU.machines.length >= 9) {
+                    $(this).css('color', 'rgba(250, 250, 250, 0.3)');
+                    $(this).css('cursor', 'auto');
+                    $(this).attr('title', '');
+                }"></i>
+            </div>
+            <h1>Paquet</h1>
+            <div id="paquetContainer">
+                <div><span>Obsolescence :</span><div id="obs">&nbsp;</div></div>
+                <div><span>Destinataire :</span><div id="dest">&nbsp;</div></div>
+                <div><span>Source :</span><div id="source">&nbsp;</div></div>
+                <div><span>Reception :</span><div id="recep">&nbsp;</div></div>
+                <div><span>Message :</span><div id="message">&nbsp;</div></div>
+            </div>
+            <div id="commentaireContainer"><h2>Commentaire</h2>
+                <div id="commentaire"></div>
+            </div>
+            <form>
+                <i class="fa fa-play fa-3x" title="Lecture automatique/Arrêt" onclick="play(); $(this).toggleClass('fa-play'); $(this).toggleClass('fa-pause');"></i>
+                <i class="fa fa-step-forward fa-3x" title="Lecture étape par étape" onclick="play(); play()"></i>
+                <div id="vitesse">500</div>
+                <input type="range" name="vitesse" min="0" max="2500" value="500" step="100" onchange="QUANTUM = this.value; $('#vitesse').html(QUANTUM);">
+                <br/>
+                Vitesse
+                <i id="interval" title="Activer/désactiver l'envoi automatiques de messages aléatoires"
+                    class="fa fa-random fa-3x" onclick="intervalOnOff();"></i>
+                <i id="addDest" title="Ajouter un message manuellement" class="fa fa-plus fa-3x" onclick="addDest();"></i>
+                <i id="addDestOff" title="Ajouter un message manuellement (Cliquez sur une machine)"
+                    class="fa fa-plus fa-3x" onclick="alert('Cliquez sur une machine dans l\'onglet réseau');"></i>
+            </form>
+        </div>
+    </body>
+</html>
